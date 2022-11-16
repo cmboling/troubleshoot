@@ -25,3 +25,7 @@ jobs:
       - name: FOSSA Analyze 
         run: |
           fossa analyze
+
+      - name: FOSSA Diff Test 
+        run: |
+          fossa test --diff main
