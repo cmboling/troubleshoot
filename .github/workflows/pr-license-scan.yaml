@@ -8,11 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: refs/pull/${{ github.event.number }}/merge
-      - name: "Install FOSSA" 
-        uses: replicatedhq/action-fossa/install@main
-      - name: "Run FOSSA Scan"
-        uses: replicatedhq/action-fossa/scan@main
-        with:
-          api-key: ${{ secrets.FOSSA_API_KEY }}
+
+      - name: Download FOSSA CLI
+        run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
+          fossa --version
+          
+      - name: FOSSA Analyze Output
+        run: |
+          fossa analyze -o | jq
+      
+      - name: FOSSA Analyze 
+        run: |
+          fossa analyze
