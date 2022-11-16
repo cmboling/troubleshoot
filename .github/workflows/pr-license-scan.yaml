@@ -2,6 +2,7 @@ name: PR license scan
 
 on:
   pull_request_target: # this is safe as these scans do not execute provided code
+  push:
 
 jobs:
   fossa-scan:
