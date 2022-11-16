@@ -7,6 +7,9 @@ on:
 jobs:
   fossa-scan:
     runs-on: ubuntu-latest
+    env:
+      FOSSA_API_KEY: ${{secrets.FOSSA_API_KEY}}
+
     steps:
       - uses: actions/checkout@v3
 
